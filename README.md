@@ -1,2 +1,0 @@
-# nodeProject
-NodeTesting Project
