@@ -2,6 +2,7 @@ const express = require("express");
 const hbs = require("hbs");
 var fs = require("fs");
 var app = express();
+const port = process.env.PORT || 8080;
 hbs.registerPartials(__dirname + "/views/partials")
 app.use(express.static(__dirname + "/public")) // this is for static that we use that provide express
 app.set("view engine", "hbs") // rendering template through handlebars
@@ -26,6 +27,6 @@ app.get("/about", function(req, res) {
     	//currentYear : new Date().getFullYear() In this we use registerHelper from hbs 
     })
 })
-app.listen(8080, function() {
-	console.log("start node")
+app.listen(port, function() {
+	console.log("start node"+ port)
 })
