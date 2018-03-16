@@ -36,7 +36,8 @@ for(var i=0; i<15; i++){
 
 var img = document.createElement("img");
         
-img.src = "../public/images/"+keyword+[i]+".jpg";
+img.src = "/images/"+keyword+[i]+".jpg";
+console.log(img.src);
 var src = document.getElementById("x");
  
 src.appendChild(img);

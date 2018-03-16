@@ -58,8 +58,19 @@ app.get('/dashboard/:keyword',function(req, res) {
    })
 });
 app.post("/submit", function(req, response) {
-     
-    google.list({
+    keyWordList.find({word: req.body.search}, function(err, result) {
+    if(err) {
+      response.send({"status": err})
+    } else {
+      console.log(result)
+        if(result.length != 0) {
+           response.render("keyword.hbs", {
+            pageTitle : "About page",
+            results : result 
+           })
+
+        } else {
+           google.list({
     keyword: req.body.search,
     num: 15,
     detail: true,
@@ -77,7 +88,7 @@ app.post("/submit", function(req, response) {
      })
     for(let url in res){
       Jimp.read(res[url].url).then(function (lenna) {
-        lenna.resize(500, 500)            // resize
+        lenna.resize(150, 150)            // resize
              .quality(90)                 // set JPEG quality
              .greyscale()                 // set greyscale
              .write("public/images/"+req.body.search+[url]+".jpg"); // save
@@ -89,6 +100,11 @@ app.post("/submit", function(req, response) {
 }).catch(function(err) {
     console.log('err', err);
 });
+
+        }
+    }
+  }) 
+    
 })
 app.listen(port, function() {
 	console.log("start node"+ port)
